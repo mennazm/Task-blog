@@ -13,6 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+use App\Jobs\DeleteOldPosts;
+use App\Jobs\FetchRandomUser;
+
+Route::get('/test-delete-old-posts', function () {
+    dispatch(new DeleteOldPosts());
+    return 'DeleteOldPosts job dispatched';
+});
+
+Route::get('/test-fetch-random-user', function () {
+    dispatch(new FetchRandomUser());
+    return 'FetchRandomUser job dispatched';
 });

@@ -27,9 +27,9 @@ class DeleteOldPosts implements ShouldQueue
      */
     public function handle():void
     {
-       
-        $posts = Post::onlyTrashed()
-            ->where('deleted_at', '<', Carbon::now()->subDays(30))
-            ->forceDelete();
+        $thirtyDaysAgo = Carbon::now()->subDays(30);
+        Post::onlyTrashed()
+        ->where('deleted_at', '<', $thirtyDaysAgo)
+        ->forceDelete();
     }
 }
